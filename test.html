@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<div id="party1" class="party">
+<div id="party1" class="party" onclick="removeCharacter(event)">
     <h2>파티 1</h2>
     <div id="characters">
         <!-- 캐릭터가 여기에 추가될 것입니다. -->
@@ -41,7 +41,7 @@
             characterDiv.classList.add('character');
             characterDiv.textContent = character;
             characterDiv.addEventListener('click', () => {
-                removeCharacter(character);
+                registerCharacter(character);
             });
             document.getElementById('characters').appendChild(characterDiv);
         } else {
@@ -50,26 +50,24 @@
     }
 
     // 캐릭터 제거 함수
-    function removeCharacter(character) {
-        // 캐릭터가 등록되어 있는지 확인 후 제거
-        if (partyCharacters.has(character)) {
-            partyCharacters.delete(character);
-            // HTML에서 해당 캐릭터 제거
-            const characterDivs = document.querySelectorAll('.character');
-            characterDivs.forEach(div => {
-                if (div.textContent === character) {
-                    div.remove();
-                }
-            });
+    function removeCharacter(event) {
+        const clickedCharacter = event.target.textContent;
+        if (partyCharacters.has(clickedCharacter)) {
+            partyCharacters.delete(clickedCharacter);
+            event.target.remove();
         }
     }
 
     // 파티에 캐릭터 등록 함수
     function registerCharacter(character) {
         const partyDiv = document.getElementById('party1');
-        const partyCharacterDiv = document.createElement('div');
-        partyCharacterDiv.textContent = character;
-        partyDiv.appendChild(partyCharacterDiv);
+        if (partyDiv.children.length === 1) {
+            const partyCharacterDiv = document.createElement('div');
+            partyCharacterDiv.textContent = character;
+            partyDiv.appendChild(partyCharacterDiv);
+        } else {
+            alert('이미 캐릭터가 등록되어 있습니다.');
+        }
     }
 
     // 초기화
