@@ -3,8 +3,10 @@
   margin: 10px;
   padding: 10px;
   display: inline-block;
+  vertical-align: top; /* 파티 칸을 위로 정렬 */
 }
 
 #characters {
   margin-top: 20px;
+  display: inline-block;
 }
