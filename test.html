@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파티 등록</title>
+<style>
+    .party {
+        margin-bottom: 10px;
+    }
+    .character {
+        display: inline-block;
+        padding: 5px;
+        margin-right: 5px;
+        background-color: lightblue;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div id="party1" class="party">
+    <h2>파티 1</h2>
+    <div id="characters">
+        <!-- 캐릭터가 여기에 추가될 것입니다. -->
+    </div>
+</div>
+
+<script>
+    // 파티에 등록된 캐릭터 목록
+    const partyCharacters = new Set();
+
+    // 캐릭터 추가 함수
+    function addCharacter(character) {
+        // 중복 등록 방지
+        if (!partyCharacters.has(character)) {
+            // 캐릭터 추가
+            partyCharacters.add(character);
+            // HTML에 캐릭터 추가
+            const characterDiv = document.createElement('div');
+            characterDiv.classList.add('character');
+            characterDiv.textContent = character;
+            characterDiv.addEventListener('click', () => {
+                removeCharacter(character);
+            });
+            document.getElementById('characters').appendChild(characterDiv);
+        } else {
+            alert('이미 등록된 캐릭터입니다.');
+        }
+    }
+
+    // 캐릭터 제거 함수
+    function removeCharacter(character) {
+        // 캐릭터가 등록되어 있는지 확인 후 제거
+        if (partyCharacters.has(character)) {
+            partyCharacters.delete(character);
+            // HTML에서 해당 캐릭터 제거
+            const characterDivs = document.querySelectorAll('.character');
+            characterDivs.forEach(div => {
+                if (div.textContent === character) {
+                    div.remove();
+                }
+            });
+        }
+    }
+
+    // 초기화
+    document.addEventListener('DOMContentLoaded', () => {
+        // 파티에 캐릭터 추가
+        addCharacter('캐릭터1');
+        addCharacter('캐릭터2');
+        addCharacter('캐릭터3');
+        addCharacter('캐릭터4');
+    });
+
+</script>
+
+</body>
+</html>
