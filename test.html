@@ -64,6 +64,14 @@
         }
     }
 
+    // 파티에 캐릭터 등록 함수
+    function registerCharacter(character) {
+        const partyDiv = document.getElementById('party1');
+        const partyCharacterDiv = document.createElement('div');
+        partyCharacterDiv.textContent = character;
+        partyDiv.appendChild(partyCharacterDiv);
+    }
+
     // 초기화
     document.addEventListener('DOMContentLoaded', () => {
         // 파티에 캐릭터 추가
